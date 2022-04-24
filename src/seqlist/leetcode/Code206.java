@@ -27,5 +27,14 @@ public class Code206 {
             return prev;
         }
     }
-
+//    public ListNode reverseList(ListNode head) {
+//        ListNode unrealHead = new ListNode();
+//        while (head != null) {
+//            ListNode node = new ListNode(head.val);
+//            node.next = unrealHead.next;
+//            unrealHead.next = node;
+//            head = head.next;
+//        }
+//        return unrealHead.next;
+//    }
 }
