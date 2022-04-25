@@ -1,6 +1,6 @@
 package seqlist.leetcode;
 
-public class Code21 {
+public class  Code21 {
     /**
      * Definition for singly-linked list.
      * public class ListNode {
