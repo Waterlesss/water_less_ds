@@ -1,3 +1,5 @@
+package com.zy;
+
 public class Mount_Qomolangma {
     public static void main(String[] args) {
         double mount = 884886;
