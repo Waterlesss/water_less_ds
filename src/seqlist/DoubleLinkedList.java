@@ -20,7 +20,7 @@ public class DoubleLinkedList {
 
     public void addLast(int val) {
         DoubleNode node = new DoubleNode(tail,val,null);
-        if (head == null) {
+        if (tail == null) {
             head = node;
         } else {
             tail.next = node;
@@ -39,7 +39,7 @@ public class DoubleLinkedList {
         } else if (index == size) {
             addLast(val);
         } else {
-            DoubleNode prev = findNode(index);
+            DoubleNode prev = findNode(index - 1);
             DoubleNode node = new DoubleNode(prev,val,prev.next);
             prev.next.prev = node;
             prev.next = node;
@@ -56,7 +56,7 @@ public class DoubleLinkedList {
             return  x;
         } else {
             DoubleNode x = tail;
-            for (int i =size - 1; i >= index; i--) {
+            for (int i =size - 1; i > index; i--) {
                 x = x.prev;
             }
             return x;

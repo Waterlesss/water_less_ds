@@ -10,7 +10,9 @@ public class DoubleLinkedTest {
         doubleLinkedList.addLast(2);
         doubleLinkedList.addLast(3);
         System.out.println(doubleLinkedList);
-        doubleLinkedList.addIndex(2,4);
+        doubleLinkedList.addIndex(1,4);
+        doubleLinkedList.addIndex(1,5);
+        doubleLinkedList.addIndex(1,6);
         System.out.println(doubleLinkedList);
     }
 }
