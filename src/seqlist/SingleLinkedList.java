@@ -1,7 +1,5 @@
 package seqlist;
 
-import javax.net.ssl.SSLContext;
-import java.time.temporal.ValueRange;
 
 public class SingleLinkedList {
     private Node head;
@@ -9,13 +7,15 @@ public class SingleLinkedList {
 
     public static void main(String[] args) {
         SingleLinkedList singleLinkedList = new SingleLinkedList();
+        singleLinkedList.addFirst(1);
         singleLinkedList.addLast(2);
-        singleLinkedList.addLast(2);
-        singleLinkedList.addLast(2);
-        singleLinkedList.addLast(2);
-//        singleLinkedList.addIndex(2, 3);
-//        singleLinkedList.addIndex(3, 4);
-//        singleLinkedList.addIndex(4, 5);
+//        singleLinkedList.addLast(2);
+//        singleLinkedList.addLast(2);
+//        singleLinkedList.addLast(2);
+
+        singleLinkedList.addIndex(1, 3);
+        singleLinkedList.addIndex(2, 4);
+        singleLinkedList.addIndex(3, 5);
 //        System.out.println(singleLinkedList.contains(3));
 //        System.out.println(singleLinkedList.getByValue(2));
 //        System.out.println(singleLinkedList.get(2));
@@ -25,30 +25,20 @@ public class SingleLinkedList {
         System.out.println(singleLinkedList);
 //        System.out.println(singleLinkedList.remove(0));
 //        singleLinkedList.removeValueOcne(4);
-        singleLinkedList.removeAllValue(2);
-        System.out.println(singleLinkedList);
+//        singleLinkedList.removeAllValue(2);
+//        System.out.println(singleLinkedList);
 
     }
 
     public void addFirst(int val) {
-        Node node = new Node(val);
         if (head == null) {
+            Node node = new Node(val,null);
             head = node;
         } else {
-            node.next = head;
+            Node node = new Node(val,head);
             head = node;
         }
         size++;
-//        Node node = new Node(val);
-////        node.val = val;
-//        if (this.head == null) {
-//            this.head = node;
-//
-//        } else {
-//            node.next = head;
-//            this.head = node;
-//        }
-//        size++;
     }
 
     public void addLast(int val) {
@@ -81,7 +71,6 @@ public class SingleLinkedList {
 //            addLast(val);
 //            return;
 //        }
-        Node node = new Node(val);
 //        node.next = searchIndex(index).next;
 //        searchIndex(index).next = node;
 //        size++;
@@ -89,7 +78,7 @@ public class SingleLinkedList {
         for (int i = 0; i < index - 1; i++) {
             cur = cur.next;
         }
-        node.next = cur.next;
+        Node node = new Node(val,cur.next);
         cur.next = node;
         size++;
     }
@@ -105,7 +94,7 @@ public class SingleLinkedList {
 //        return cur;
 //    }
 
-    /**
+    /*
      * 删除单链表中索引为index位置的结点，返回删除前的结点值
      */
     public int remove(int index) {
@@ -223,9 +212,6 @@ public class SingleLinkedList {
 
     /**
      * 查询索引为index位置的节点值
-     *
-     * @param index
-     * @return
      */
     public int get(int index) {
         if (rangeCheck(index)) {
@@ -238,6 +224,9 @@ public class SingleLinkedList {
         return -1;
     }
 
+    /**
+     *查询链表中第一个值为key的结点，并返回它的索引
+     */
     public int getByValue(int key) {
         int index = 0;
         for (Node cur = head; cur != null; cur = cur.next) {
@@ -288,5 +277,9 @@ class Node {
 
     public Node(int val) {
         this.val = val;
+    }
+    public Node(int val,Node next) {
+        this.val = val;
+        this.next = next;
     }
 }
