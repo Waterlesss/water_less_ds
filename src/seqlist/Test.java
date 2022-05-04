@@ -28,4 +28,5 @@ public class Test {
 //        System.out.println(myArray.removeAllValue(30));
         System.out.println(myArray);
     }
+
 }

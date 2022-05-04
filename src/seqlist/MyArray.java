@@ -1,7 +1,5 @@
 package seqlist;
 
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
-
 import java.util.Arrays;
 
 public class MyArray {
@@ -103,7 +101,6 @@ public class MyArray {
         }
         //元素搬移，从index开始，后一个元素覆盖前一个元素
         // 一直走到size-1（最后一个有效元素）
-        //
         int oldVal = data[index];
         for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
