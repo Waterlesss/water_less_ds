@@ -13,7 +13,6 @@ import java.util.Stack;
  */
 public class Code155 {
     class MinStack {
-
         private Stack<Integer> s1 = new Stack<>();
         private Stack<Integer> s2 = new Stack<>();
         public MinStack() {
