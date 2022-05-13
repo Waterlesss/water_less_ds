@@ -1,4 +1,4 @@
-package seqlist.leetcode;
+package queue.leetcode;
 
 public class Code622 {
     /**

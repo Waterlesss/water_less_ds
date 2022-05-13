@@ -1,4 +1,4 @@
-package seqlist.leetcode;
+package stack.leetcode;
 
 import java.util.Stack;
 
