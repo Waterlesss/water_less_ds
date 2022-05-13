@@ -5,7 +5,7 @@ import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Code144 {
+//public class Code144 {
     /**
      * Definition for a binary tree node.
      * public class TreeNode {
@@ -21,24 +21,24 @@ public class Code144 {
      * }
      * }
      */
-    class Solution {
-
-
-        List<Integer> ret = new ArrayList<>();
-
-        public List<Integer> preorderTraversal(TreeNode root) {
-
-            if (root == null) {
-                return ret;
-            }
-
-            ret.add(root.val);
-
-            preorderTraversal(root.left);
-
-            preorderTraversal(root.right);
-
-            return ret;
-        }
-    }
-}
+//    class Solution {
+//
+//
+//        List<Integer> ret = new ArrayList<>();
+//
+//        public List<Integer> preorderTraversal(TreeNode root) {
+//
+//            if (root == null) {
+//                return ret;
+//            }
+//
+//            ret.add(root.val);
+//
+//            preorderTraversal(root.left);
+//
+//            preorderTraversal(root.right);
+//
+//            return ret;
+//        }
+//    }
+//}
