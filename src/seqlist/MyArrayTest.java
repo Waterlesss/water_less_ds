@@ -1,6 +1,6 @@
 package seqlist;
 
-public class Test {
+public class MyArrayTest {
     public static void main(String[] args) {
         MyArray myArray = new MyArray(3);
         myArray.add(10);
