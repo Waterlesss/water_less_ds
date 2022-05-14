@@ -55,6 +55,7 @@ public class LoopQueue implements Queue<Integer> {
     public boolean isFull() {
         return (tail + 1) % data.length == head;
     }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("head [");
