@@ -8,9 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Code144 {
-    //递归实现树的线序遍历
+    //递归和迭代实现树的先序遍历
 
-//      Definition for a binary tree node.
       public class TreeNode {
       int val;
       TreeNode left;
@@ -25,7 +24,7 @@ public class Code144 {
       }
 
     class Solution {
-
+//迭代写法
           public List<Integer> preorderTraversal(TreeNode root) {
                 List<Integer> ret = new ArrayList<>();
                 if (root == null) {
@@ -45,6 +44,7 @@ public class Code144 {
                 }
                 return ret;
           }
+          //递归写法
 //        List<Integer> ret = new ArrayList<>();
 //
 //        public List<Integer> preorderTraversal(TreeNode root) {

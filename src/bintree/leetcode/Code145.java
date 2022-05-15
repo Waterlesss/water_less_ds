@@ -1,6 +1,8 @@
 package bintree.leetcode;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,15 +25,42 @@ public class Code145 {
        }
 
     class Solution {
-        List<Integer> ret = new ArrayList<>();
+           //迭代写法
         public List<Integer> postorderTraversal(TreeNode root) {
+            List<Integer> ret = new ArrayList<>();
             if (root == null) {
                 return ret;
             }
-            postorderTraversal(root.left);
-            postorderTraversal(root.right);
-            ret.add(root.val);
+            Deque<TreeNode> stack = new LinkedList<>();
+            TreeNode node = root;
+            TreeNode prev = null;
+            while (node != null || !stack.isEmpty()) {
+                while (node != null) {
+                    stack.push(node);
+                    node = node .left;
+                }
+                node = stack.pop();
+                if (node.right == null || prev == node.right) {
+                    ret.add(node.val);
+                    prev = node;
+                    node =null;
+                } else {
+                    stack.push(node);
+                    node= node.right;
+                }
+            }
             return ret;
         }
+        //递归写法
+//        List<Integer> ret = new ArrayList<>();
+//        public List<Integer> postorderTraversal(TreeNode root) {
+//            if (root == null) {
+//                return ret;
+//            }
+//            postorderTraversal(root.left);
+//            postorderTraversal(root.right);
+//            ret.add(root.val);
+//            return ret;
+//        }
     }
 }
