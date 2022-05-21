@@ -1,4 +1,4 @@
-package bintree.map_set.leetcode;
+package bintree.nowcoder;
 
 import java.util.HashSet;
 
@@ -28,6 +28,7 @@ public class BadKey {
         Set<Character> single = new HashSet<>();
         for (int j = 0; j < expectStr.length(); j++) {
             char c = expectStr.charAt(j);
+            //保证输出的顺序
             if (!set.contains(c)) {
                 if (single.add(c)) {
                     System.out.print(c);
