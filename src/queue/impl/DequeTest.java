@@ -3,6 +3,9 @@ package queue.impl;
 import java.util.Deque;
 import java.util.LinkedList;
 
+/**
+ * 双端队列 Deque——>Queue的子接口
+ */
 public class DequeTest {
     public static void main(String[] args) {
         //现在需要的是一个栈

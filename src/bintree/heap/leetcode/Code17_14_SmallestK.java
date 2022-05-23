@@ -10,14 +10,6 @@ import java.util.Queue;
  * @Description:最小的k个数
  */
 
-//class IntReverse implements Comparator<Integer> {
-//
-//
-//    @Override
-//    public int compare(Integer o1, Integer o2) {
-//        return o2 - o1;
-//    }
-//}
 
 public class Code17_14_SmallestK {
     public int[] smallestK(int[] arr, int k) {
@@ -51,11 +43,5 @@ public class Code17_14_SmallestK {
             i++;
         }
         return ret;
-//        Queue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>() {
-//            @Override
-//            public int compare(Integer o1, Integer o2) {
-//                return o2 - o1;
-//            }
-//        });
     }
 }

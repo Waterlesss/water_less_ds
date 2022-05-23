@@ -1,4 +1,4 @@
-package com.zy;
+package seqlist;
 
 
 public class LinkedList {

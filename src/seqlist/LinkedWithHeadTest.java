@@ -1,6 +1,6 @@
-package com.zy;
+package seqlist;
 
-public class WithHeadTest {
+public class LinkedWithHeadTest {
     public static void main(String[] args) {
         LinkedListWithHead linkedListWithHead =new LinkedListWithHead();
         linkedListWithHead.add(3);

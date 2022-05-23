@@ -1,7 +1,7 @@
-package com.zy;
+package seqlist;
 
 
-import com.sun.glass.ui.Size;
+import seqlist.LinkedList;
 
 public class LinkedTest {
     public static void main(String[] args) {

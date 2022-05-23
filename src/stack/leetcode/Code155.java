@@ -26,11 +26,6 @@ public class Code155 {
             } else {
                 int peek = s2.peek();
                 s2.push(Math.min(val,s2.peek()));
-//                if (val > s2.peek()) {
-//                    s2.push(s2.peek());
-//                } else {
-//                    s2.push(val);
-//                }
             }
         }
 
