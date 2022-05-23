@@ -1,6 +1,5 @@
 package com.zy;
 
-import java.beans.PropertyVetoException;
 
 public class LinkedList {
     private Node head;
