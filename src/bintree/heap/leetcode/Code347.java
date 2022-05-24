@@ -18,12 +18,7 @@ public class Code347 {
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer,Integer> hashMap = new HashMap<>();
         for (int i : nums) {
-            if (hashMap.containsKey(i)) {
-                int count = hashMap.get(i);
-                hashMap.put(i , count + 1);
-            } else {
-                hashMap.put(i , 1);
-            }
+            hashMap.put(i,hashMap.getOrDefault(i,0) + 1);
         }
         Queue<Sup> prique = new PriorityQueue<>(new Comparator<Sup>() {
             @Override
