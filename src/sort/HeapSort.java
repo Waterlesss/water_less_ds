@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @Date: 2022/05/20/8:38
  * @Description:七大排序
  */
-public class SevenSort {
+public class HeapSort {
     public static void main(String[] args) {
         int[] arr = {19,27,13,22,3,1,6,5,4,2,100,67,70,98};
         heapSort(arr);
