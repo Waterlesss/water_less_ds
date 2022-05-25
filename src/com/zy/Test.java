@@ -1,10 +1,15 @@
 package com.zy;
 
+import java.util.Arrays;
+
 public class Test {
     public static void main(String[] args) {
-        Person per = new Person();
-        Person per1 = new Person("张三");
-        Person per2 = new Person("女",18);
+        String str = "1-2--3----4-5--6--7";
+        String[] data = str.split("-");
+        System.out.println(Arrays.toString(data));
+//        Person per = new Person();
+//        Person per1 = new Person("张三");
+//        Person per2 = new Person("女",18);
     }
 }
 class Person {
