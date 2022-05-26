@@ -6,11 +6,11 @@ public class DoubleLinkedTest {
 //        doubleLinkedList.addFist(1);
 //        doubleLinkedList.addFist(2);
 //        doubleLinkedList.addFist(3);
-        doubleLinkedList.addLast(2);
-        doubleLinkedList.addLast(2);
-        doubleLinkedList.addLast(2);
-        doubleLinkedList.addLast(2);
-        doubleLinkedList.addLast(2);
+//        doubleLinkedList.addLast(2);
+//        doubleLinkedList.addLast(2);
+//        doubleLinkedList.addLast(2);
+        doubleLinkedList.addLast(0);
+        doubleLinkedList.addLast(1);
         doubleLinkedList.addLast(2);
         System.out.println(doubleLinkedList);
 //        doubleLinkedList.set(2,4);

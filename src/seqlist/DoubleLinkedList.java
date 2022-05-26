@@ -95,7 +95,7 @@ public class DoubleLinkedList {
             node.prev = null;
         }
         if (successor == null) {
-            tail = node.prev;
+            tail = prev;
         } else {
             successor.prev = prev;
             node.next = null;
@@ -128,19 +128,19 @@ public class DoubleLinkedList {
     }
 
     private DoubleNode findNode(int index) {
+        DoubleNode x = null;
         if (index < size / 2) {
-            DoubleNode x = head;
+            x = head;
             for (int i = 0; i < index; i++) {
                 x = x.next;
             }
-            return x;
         } else {
-            DoubleNode x = tail;
+            x = tail;
             for (int i = size - 1; i > index; i--) {
                 x = x.prev;
             }
-            return x;
         }
+        return x;
     }
 
     public String toString() {
