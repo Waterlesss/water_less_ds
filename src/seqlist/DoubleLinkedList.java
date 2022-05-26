@@ -89,7 +89,7 @@ public class DoubleLinkedList {
         DoubleNode prev = node.prev;
         DoubleNode successor = node.next;
         if (prev == null) {
-            head = node.next;
+            head = successor;
         } else {
             prev.next = successor;
             node.prev = null;
