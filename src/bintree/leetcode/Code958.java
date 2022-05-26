@@ -30,6 +30,8 @@ public class Code958 {
             boolean isSecond = false;
             while(!queue.isEmpty()) {
                 TreeNode node = queue.poll();
+                //当括号里条件为真才走，否则 else
+                //如果不加！ 则需要交换真假条件下的代码
                 if (!isSecond) {
                     //在第一阶段中每个节点都必须存在左右子树
                     if (node.left != null && node.right != null) {
