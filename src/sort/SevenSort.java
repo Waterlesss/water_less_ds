@@ -1,28 +1,38 @@
 package sort;
 
 
+import sun.misc.LRUCache;
+
+import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * @Author: Waterless
  * @Date: 2022/05/27/10:47
  * @Description:七大排序
  */
 public class SevenSort {
+    public static ThreadLocalRandom random = ThreadLocalRandom.current();
     public static void main(String[] args) {
+//        int[] arr = {9,5,6,3};
+//        mergeSort(arr);
+//        System.out.println(Arrays.toString(arr));
 //        int[] arr = {19,27,13,22,3,1,6,5,4,2,100,67,70,98};
 //        selectionSort(arr);
 //        System.out.println(Arrays.toString(arr));
-        int n = 100000;
+        int n = 10000000;
         int[] arr = SortHelper.generaRandomArray(n,0,Integer.MAX_VALUE);
-//        int[] data = SortHelper.generateSortedArray(n,10);
         int[] data = SortHelper.generateSortedArray(n,10);
+//        int[] data = SortHelper.generateSortedArray(n,10);
         int[] arr1 = SortHelper.arrCopy(arr);
         int[] arr2 = SortHelper.arrCopy(arr);
         int[] arr3 = SortHelper.arrCopy(arr);
-        SortHelper.testSort(arr,"selectionSort");
-//        SortHelper.testSort(arr1,"heapSort");
-        SortHelper.testSort(arr1,"selectionSortOP");
+////        SortHelper.testSort(arr,"selectionSort");
+        SortHelper.testSort(arr,"heapSort");
+//        SortHelper.testSort(arr1,"selectionSortOP");
 //        SortHelper.testSort(arr1,"insertionSort");
-//        SortHelper.testSort(arr3,"insertionSortBS");
+//        SortHelper.testSort(arr3,"shellSort");
+        SortHelper.testSort(arr1,"mergeSort");
     }
 
     //选择排序
@@ -131,6 +141,181 @@ public class SevenSort {
             arr[left] = val;
         }
     }
+
+    /**
+     * 希尔排序，缩小增量排序，按照gap将原数组分为gap个子数组，子数组内部先排序
+     * 不断缩小gap的值 直到gap=1；此时整个数组近乎有序，再来一次插入排序
+     * @param arr
+     */
+     public static void shellSort(int[] arr) {
+        int gap = arr.length >> 1;
+        //预处理阶段
+         while (gap >= 1) {
+             insertionSortByGap(arr,gap);
+             gap = gap >> 1;
+         }
+         //此时gap=1；整个数组近乎有序，再来一次插入排序
+     }
+
+    /**
+     * 极端情况，假设gap=1; 此时就是个插入排序
+     * @param arr
+     * @param gap
+     */
+    private static void insertionSortByGap(int[] arr, int gap) {
+        for (int i = gap; i  < arr.length; i++) {
+            //j = j - gap 只看相同分组每次走gap步
+            for (int j = i; j - gap >= 0 && arr[j] < arr[j - gap] ; j = j - gap) {
+                swap(arr,j,j-gap);
+            }
+        }
+    }
+
+    /**
+     * 归并排序
+     * @param arr
+     */
+    public static void mergeSort(int[] arr) {
+        mergeSortInternal(arr,0,arr.length - 1);
+    }
+
+    /**
+     * 迭代实现归并排序
+     * @param arr
+     */
+    public static void meergeSortNoRecursion(int[] arr) {
+        /*
+         最外循环表示每次合并的子数组的元素个数
+         子数组为1个元素，第二次循环2个元素，第三次循环合并4个元素，以此类推
+         直到整个数组合并完成
+         */
+        for (int size = 1; size <= arr.length ; size = size + size) {
+            //内层循环表示merge的操作
+            //变量i就是每次合并操作的开始索引l
+            for (int i = 0; i + size < arr.length; i = i + size + size) {
+                //边界i + size + size - 1 > arr.length
+                merge(arr,i,i + size - 1,Math.min(i + size + size - 1,arr.length - 1));
+            }
+        }
+    }
+
+    /**
+     *在arr[l...r]上进行归并排序
+     * @param arr
+     * @param l
+     * @param r
+     */
+    private static void mergeSortInternal(int[] arr, int l, int r) {
+        //优化2：小数组直接使用插入排序
+        if (r - l <= 15) {
+            insertionSort(arr,l,r);
+            return;
+        }
+        //int mid = (l + r) / 2;
+        int mid = l + ((r - l) >> 1);
+        mergeSortInternal(arr,l,mid);
+        mergeSortInternal(arr,mid + 1,r);
+        //arr[l...mid] 和 arr[mid + 1...r]已经有序，只需要合并这两个子数组
+        //优化1：arr[mid](数组1的最大值) < arr[mid + 1](数组2的最小值) 说明此时整个数组已经有序
+        if (arr[mid] > arr[mid + 1]) {
+            merge(arr,l,mid,r);
+        }
+    }
+
+    /**
+     * 在arr[l...r]上进行插入排序
+     * @param arr
+     * @param l
+     * @param r
+     */
+    private static void insertionSort(int[] arr, int l, int r) {
+        for (int i = l + 1; i <= r ; i++) {
+            for (int j = i; j - l >= 1 && arr[j] < arr[j - 1] ; j--) {
+                swap(arr,j,j - 1);
+            }
+        }
+    }
+
+    /**
+     * 将有序子数组arr[l...mid] 和 arr[mid + 1...r]合并成为一个大的有序数组arr
+     * @param arr
+     * @param l
+     * @param mid
+     * @param r
+     */
+    private static void merge(int[] arr, int l, int mid, int r) {
+        //现创建一个新的数组aux，将子数组的值复制给新数组
+        int[] aux = new int[r - l + 1];
+        // l = 2,r = 4;
+        // arr[2...4];
+        // aux[0...2];索引下标差了l个偏移量
+        for (int i = 0; i < aux.length; i++) {
+            //aux的下标0...arr.length - 1;
+            //arr的下标l...r ;
+            aux[i] = arr[i + l];
+        }
+        //数组1的开始下标
+        int i = l;
+        //数组2的开始下标
+        int j = mid + 1;
+        for (int k = l; k <= r; k++) {
+            if (i > mid) {
+                //第一个数组已经遍历完毕
+                arr[k] = aux[j -l];
+                j++;
+            } else if (j > r) {
+                //第二个子数组遍历完毕
+                arr[k] = aux[i - l];
+                i++;
+            } else if (aux[i - l] <= aux[j - l]) {
+                //将aux[i-l]写回arr[k]
+                arr[k] = aux[i - l];
+                i++;
+            } else {
+                //aux[i - l] > aux[j - l],写回aux[j - l]
+                arr[k] = aux[j - l];
+                j++;
+            }
+        }
+    }
+    //快速排序
+    public static void quickSort(int[] arr) {
+        quickSortInternal(arr,0,arr.length - 1);
+    }
+
+    private static void quickSortInternal(int[] arr, int l, int r) {
+        if (r - l <= 15) {
+            insertionSort(arr,l,r);
+            return;
+        }
+        int p = partition(arr,l,r);
+        //继续在左右两个子区间进行快速排序
+        //所有 < v的元素
+        quickSortInternal(arr,l,p - 1);
+        //所有 >= v 的元素
+        quickSortInternal(arr,p + 1,r);
+    }
+
+    private static int partition(int[] arr, int l, int r) {
+        int randomIndex = random.nextInt(l,r);
+        swap(arr,l,randomIndex);
+        int v = arr[l];
+        //arr[l + 1 ...j] < v
+        //最开始区间没有元素,区间的定义就是变量的初始化条件
+        int j = l;
+        //arr[j + 1...i) >= v
+        //最开始大于区间也没有元素
+        for (int i = l + 1; i <= r; i++) {
+            if (arr[i] < v) {
+                swap(arr,i,j + 1);
+                j++;
+            }
+        }
+        //此时元素j就是最后一个小于v的元素，就把v换到j的位置
+        swap(arr,l,j);
+        return j;
+    }
+
 
     //原地堆排序
     public static void heapSort(int[] arr) {
