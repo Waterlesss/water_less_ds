@@ -30,8 +30,8 @@ public class SevenSort {
 ////        SortHelper.testSort(arr,"selectionSort");
         SortHelper.testSort(arr,"heapSort");
 //        SortHelper.testSort(arr1,"selectionSortOP");
-//        SortHelper.testSort(arr1,"insertionSort");
-//        SortHelper.testSort(arr3,"shellSort");
+        SortHelper.testSort(arr2,"quickSortHoare");
+        SortHelper.testSort(arr3,"quickSort");
         SortHelper.testSort(arr1,"mergeSort");
     }
 
@@ -183,7 +183,7 @@ public class SevenSort {
      * 迭代实现归并排序
      * @param arr
      */
-    public static void meergeSortNoRecursion(int[] arr) {
+    public static void mergeSortNoRecursion(int[] arr) {
         /*
          最外循环表示每次合并的子数组的元素个数
          子数组为1个元素，第二次循环2个元素，第三次循环合并4个元素，以此类推
@@ -314,6 +314,50 @@ public class SevenSort {
         //此时元素j就是最后一个小于v的元素，就把v换到j的位置
         swap(arr,l,j);
         return j;
+    }
+
+    /**
+     * 快速排序 挖坑法
+     * @param arr
+     */
+    public static void quickSortHoare(int[] arr) {
+        quickSortInternalHoare(arr,0,arr.length - 1);
+    }
+
+    private static void quickSortInternalHoare(int[] arr, int l, int r) {
+        if (r - l <= 15) {
+            insertionSort(arr,l,r);
+            return;
+        }
+        int p = partitionHoare(arr,l,r);
+        //继续在左右两个子区间进行快速排序
+        //所有 < v的元素
+        quickSortInternalHoare(arr,l,p - 1);
+        //所有 >= v 的元素
+        quickSortInternalHoare(arr,p + 1,r);
+    }
+
+    //挖坑分区法
+    private static int partitionHoare(int[] arr, int l, int r) {
+        int randomIndex = random.nextInt(l,r);
+        swap(arr,l,randomIndex);
+        int pivot = arr[l];
+        int i = l;
+        int j = r;
+        while (i < j) {
+            //先让j从后向前扫描到第一个 < pivot 的元素停止
+            while (i < j && arr[j] >= pivot) {
+                j--;
+            }
+            arr[i] = arr[j];
+            //再让i从前到后扫描到第一个大于pivot的元素停止
+            while (i< j && arr[i] <= pivot) {
+                i++;
+            }
+            arr[j] = arr[i];
+        }
+        arr[i] = pivot;
+        return i;
     }
 
 
