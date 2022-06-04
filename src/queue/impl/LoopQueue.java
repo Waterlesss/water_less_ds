@@ -4,7 +4,7 @@ import queue.Queue;
 
 import java.util.NoSuchElementException;
 
-//基于整型的循环队列
+//基于整型数组的循环队列
 public class LoopQueue implements Queue<Integer> {
     //定长数组
     private Integer[] data;
